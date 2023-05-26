@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ENCRIPTADOR DE TEXTO</title>
+  <style>
+    body {
+      font-family: "Arial", sans-serif;
+      background-image: url("https://img.freepik.com/vector-gratis/papel-blanco-manchas-doradas_23-2148911745.jpg?w=996&t=st=1685082745~exp=1685083345~hmac=470f98c935b7a3a55c24ea4013a6c632ec85f450c50ab116e6050bc7ab65582f"); /* Reemplaza "ruta_de_la_imagen.jpg" con la ruta de tu imagen de fondo */
+      background-size: cover;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    }
+
+    h1 {
+      text-align: center;
+      color: #333333;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 17px;
+      color: #333333;
+    }
+
+    textarea {
+      width: 95%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #ffffff;
+      color: #333333;
+      resize: none;
+      border: 2px solid #ccc;
+      font-size: 15px; /* Aumentar tamaño de letra para el texto de entrada */
+    }
+
+    .button-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .button-container button {
+      background-color: #FF9800;
+      color:#333333;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      margin-right: 10px;
+      transition: background-color 0.4s ease;
+    }
+
+    .button-container button:hover {
+      background-color: #1e88e5;
+    }
+
+    #resultado {
+      height: 80px;
+      border: none;
+      border-radius: 5px;
+      background-color: #ffffff;
+      color: #333333;
+      padding: 10px;
+      border: 2px solid #ccc;
+      font-size: 15px; /* Aumentar tamaño de letra para el resultado */
+    }
+
+    .created-by {
+      text-align: center;
+      margin-top: 20px;
+      color: #333333;
+    }
+  </style>
+  <script>
+    function encriptarTexto() {
+      var texto = document.getElementById("texto").value.toLowerCase();
+
+      if (!contieneVocales(texto)) {
+        alert("Por favor, ingrese una palabra con vocales.");
+        return;
+      }
+
+      var resultado = "";
+
+      for (var i = 0; i < texto.length; i++) {
+        var letra = texto.charAt(i);
+        switch (letra) {
+          case "e":
+            resultado += "enter";
+            break;
+          case "i":
+            resultado += "imes";
+            break;
+          case "a":
+            resultado += "ai";
+            break;
+          case "o":
+            resultado += "ober";
+            break;
+          case "u":
+            resultado += "ufat";
+            break;
+          default:
+            resultado += letra;
+            break;
+        }
+      }
+
+      document.getElementById("resultado").value = resultado;
+    }
+
+    function desencriptarTexto() {
+      var texto = document.getElementById("texto").value.toLowerCase();
+
+      if (!contieneVocales(texto)) {
+        alert("Por favor, ingrese una palabra con vocales.");
+        return;
+      }
+
+      var resultado = "";
+
+      for (var i = 0; i < texto.length; i++) {
+        var letra = texto.charAt(i);
+        switch (letra) {
+          case "e":
+            if (texto.substr(i, 5) === "enter") {
+              resultado += "e";
+              i += 4;
+            } else {
+              resultado += letra;
+            }
+            break;
+          case "i":
+            if (texto.substr(i, 4) === "imes") {
+              resultado += "i";
+              i += 3;
+            } else {
+              resultado += letra;
+            }
+            break;
+          case "a":
+            if (texto.substr(i, 2) === "ai") {
+              resultado += "a";
+              i += 1;
+            } else {
+              resultado += letra;
+            }
+            break;
+          case "o":
+            if (texto.substr(i, 4) === "ober") {
+              resultado += "o";
+              i += 3;
+            } else {
+              resultado += letra;
+            }
+            break;
+          case "u":
+            if (texto.substr(i, 4) === "ufat") {
+              resultado += "u";
+              i += 3;
+            } else {
+              resultado += letra;
+            }
+            break;
+          default:
+            resultado += letra;
+            break;
+        }
+      }
+
+      document.getElementById("resultado").value = resultado;
+    }
+
+    function contieneVocales(texto) {
+      var vocales = ["a", "e", "i", "o", "u"];
+
+      for (var i = 0; i < texto.length; i++) {
+        if (vocales.indexOf(texto.charAt(i)) !== -1) {
+          return true;
+        }
+      }
+
+      return false;
+    }
+
+    function copiarTexto() {
+      var resultado = document.getElementById("resultado");
+      resultado.select();
+      document.execCommand("copy");
+      alert("Texto copiado al portapapeles.");
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h1>ENCRIPTADOR DE TEXTO</h1>
+
+    <label for="texto">Texto:</label>
+    <textarea id="texto" rows="4" cols="50" placeholder="Ingrese texto"></textarea><br>
+
+    <div class="button-container">
+      <button onclick="encriptarTexto()">Encriptar</button>
+      <button onclick="desencriptarTexto()">Desencriptar</button>
+    </div>
+
+    <label for="resultado">Resultado:</label>
+    <textarea id="resultado" rows="4" cols="50" readonly placeholder="Texto encriptado/desencriptado"></textarea>
+
+    <div class="button-container">
+      <button onclick="copiarTexto()">Copiar</button>
+    </div>
+
+    <div class="created-by">
+      Fue creado por [OLENKA LEVANO]
+    </div>
+  </div>
+</body>
+</html>
